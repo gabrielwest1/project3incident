@@ -83,7 +83,7 @@ void callMenu()
 
 int main()
 {
-    std::string fileName = "chainness_point_2021_part1.csv";
+    std::string fileName1 = "chainness_point_2021_part1.csv";
     std::string fileName2 = "chainness_point_2021_part2.csv";
     std::string fileName3 = "chainness_point_2021_part3.csv";
 
