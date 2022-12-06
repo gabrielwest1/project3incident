@@ -10,7 +10,7 @@ void top5_Chains_StateSide(std::string& state,std::map<std::string,std::map<std:
 {
 
 }
-void top5_NonChains_StatSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top5_NonChains_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
@@ -110,31 +110,39 @@ int main()
             case 1:
                 std::cout << "\nWhich state would you like to select?\n" << std::endl;
                 std::cin >> state;
-                std::cout << state << " is cool\n" << std::endl;
+                
+                top5_Chains_StateSide(state,usRestaurants);
+
                 callMenu();
                 std::cin >> choice;
                 break;
             case 2:
                 std::cout << "\nWhich state would you like to select?\n" << std::endl;
                 std::cin >> state;
-                std::cout << state << " is cool\n" << std::endl;
+                
+                top5_NonChains_StateSide(state,usRestaurants);
+
                 callMenu();
                 std::cin >> choice;
                 break;
             case 3:
-                //temp
+                top10_MostFrequent_Chain_NationWide(usRestaurants);
+
                 callMenu();
                 std::cin >> choice;
                 break;
             case 4:
-                // temp
+                top10_MostFrequent_NonChain_NationWide(usRestaurants);
+                
                 callMenu();
                 std::cin >> choice;
                 break;
             case 5:
                 std::cout << "\nWhich restaurant would you like to select?\n" << std::endl;
                 std::cin >> restaurant;
-                std::cout << restaurant << " is cool\n" << std::endl;
+                
+                restaurant_MostFrequent_StateSide(restaurant,usRestaurants);
+
                 callMenu();
                 std::cin >> choice;
                 break;
