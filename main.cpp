@@ -6,23 +6,23 @@
 #include "Sorts.h"
 
 // menu functions utilizing sorts
-void top5_Chains_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top5_Chains_StateSide(std::string& state,int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top5_NonChains_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top5_NonChains_StateSide(std::string& state,int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top10_MostFrequent_Chain_NationWide(std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top10_MostFrequent_Chain_NationWide(int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top10_MostFrequent_NonChain_NationWide(std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top10_MostFrequent_NonChain_NationWide(int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void restaurant_MostFrequent_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void restaurant_MostFrequent_StateSide(std::string& restaurant,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
@@ -81,6 +81,13 @@ void callMenu()
                 "0. Exit\n" << std::endl;
 }
 
+void callSort()
+{
+    std::cout<< "\nWhich sort would you like to use?\n" <<
+                "1. Quick Sort\n" <<
+                "2. Merge Sort\n" << std::endl;
+}
+
 int main()
 {
     std::string fileName1 = "chainness_point_2021_part1.csv";
@@ -89,11 +96,11 @@ int main()
 
     std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>> usRestaurants;
     
-    //readFile(fileName, usRestaurants);
+    //readFile(fileName1, usRestaurants);
     //readFile(fileName2, usRestaurants);
     //readFile(fileName3, usRestaurants);
 
-    int choice;
+    int choice,sort; // sort will contain 1 or 2 for quick or merge respectively
 
     std::cout << "Welcome to the U.S. Restaurant Frequency Project!" << std::endl;
     callMenu();
@@ -110,8 +117,11 @@ int main()
             case 1:
                 std::cout << "\nWhich state would you like to select?\n" << std::endl;
                 std::cin >> state;
-                
-                top5_Chains_StateSide(state,usRestaurants);
+
+                callSort();
+                std::cin >> sort;
+
+                top5_Chains_StateSide(state,sort,usRestaurants);
 
                 callMenu();
                 std::cin >> choice;
@@ -120,19 +130,28 @@ int main()
                 std::cout << "\nWhich state would you like to select?\n" << std::endl;
                 std::cin >> state;
                 
-                top5_NonChains_StateSide(state,usRestaurants);
+                callSort();
+                std::cin >> sort;
+
+                top5_NonChains_StateSide(state,sort,usRestaurants);
 
                 callMenu();
                 std::cin >> choice;
                 break;
             case 3:
-                top10_MostFrequent_Chain_NationWide(usRestaurants);
+                callSort();
+                std::cin >> sort;
+
+                top10_MostFrequent_Chain_NationWide(sort,usRestaurants);
 
                 callMenu();
                 std::cin >> choice;
                 break;
             case 4:
-                top10_MostFrequent_NonChain_NationWide(usRestaurants);
+                callSort();
+                std::cin >> sort;
+
+                top10_MostFrequent_NonChain_NationWide(sort,usRestaurants);
                 
                 callMenu();
                 std::cin >> choice;
@@ -148,6 +167,7 @@ int main()
                 break;
             default:
                 std::cout << "\nPlease enter a valid number."<< std::endl;
+
                 callMenu();
                 std::cin >> choice;
                 break;
