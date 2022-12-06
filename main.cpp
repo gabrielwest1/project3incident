@@ -2,98 +2,148 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <map>
+#include "Sorts.h"
 
-void readFile(const std::string& fileName, std::string& restaurantName, std::string& cusine, std::string& openHours, std::string& state, std::string& countryGEOID, std::string& countryName, std::string& uaGEOID, std::string& uaName, std::string& msaGEOID, std::string& msaName, std::string& longitude, std::string& latitude, std::string& frequencyString, std::string& isChainString) {
+// menu functions utilizing sorts
+void top5_Chains_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
+
+}
+void top5_NonChains_StatSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
+
+}
+void top10_MostFrequent_Chain_NationWide(std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
+
+}
+void top10_MostFrequent_NonChain_NationWide(std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
+
+}
+void restaurant_MostFrequent_StateSide(std::string& state,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
+
+}
+
+// function to read in file and update the current container
+void readFile(const std::string& fileName,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+{
     std::ifstream inFile(fileName);
     std::string line;
 
-    int frequency;
-    int isChain;
-    //std::vector<std::string> restaurants;
+    // place holder data but not needed
+    std::string cusine,openHours,countryGEOID,countryName,uaGEOID,uaName,msaGEOID,msaName,longitude,latitude;
+
+    // data that will be used for all functions
+    std::string restaurantName,state,frequencyString,isChainString;
+    int frequency,isChain;
 
     while (getline(inFile, line)) {
         std::istringstream stream(line);
-        getline(stream, restaurantName, ',');
-        getline(stream, cusine, ',');
-        getline(stream, openHours, ',');
-        getline(stream, state, ',');
-        getline(stream, countryGEOID, ',');
-        getline(stream, countryName, ',');
-        getline(stream, uaGEOID, ',');
-        getline(stream, uaName, ',');
-        getline(stream, msaGEOID, ',');
-        getline(stream, msaName, ',');
-        getline(stream, longitude, ',');
-        getline(stream, latitude, ',');
-        getline(stream, frequencyString, ',');
-        //frequency = stoi(frequencyString);
-        getline(stream, isChainString, ',');
-        //isChain = stoi(isChainString);
+        getline(stream, restaurantName, ','); // ------------------------- need
 
+        getline(stream, cusine, ','); // dont need
+        getline(stream, openHours, ','); // dont need
+
+        getline(stream, state, ','); // ------------------------- need
+
+        getline(stream, countryGEOID, ','); // dont need
+        getline(stream, countryName, ','); // dont need
+        getline(stream, uaGEOID, ','); // dont need
+        getline(stream, uaName, ','); // dont need
+        getline(stream, msaGEOID, ','); // dont need
+        getline(stream, msaName, ','); // dont need
+        getline(stream, longitude, ','); // dont need
+        getline(stream, latitude, ','); // dont need
+
+        getline(stream, frequencyString, ','); // ------------------------- need
+        frequency = stoi(frequencyString);
+        getline(stream, isChainString, ','); // ------------------------- need
+        isChain = stoi(isChainString);
+
+        list.insert(std::make_pair(state,std::map<std::string,std::vector<std::pair<int,int>>>()));
+        list[state].insert(std::make_pair(restaurantName,std::vector<std::pair<int,int>>()));
+        list[state][restaurantName].push_back(std::make_pair(frequency,isChain));
     }
 }
 
-int main() {
+// simple void function for repetitive calls for the menu
+void callMenu()
+{
+    std::cout<< "\nMenu:\n" <<
+                "1. Find top 5 most frequent chain restaurant in a specific state\n" <<
+                "2. Find top 5 most frequent NON-chain restaurants in a specific state\n" << 
+                "3. List top 10 most frequent chain restaurants in the U.S.\n" <<
+                "4. List top 10 most frequent NON-chain restaurants in the U.S.\n" <<
+                "5. What state is a certain restaurant most frequent in?\n" <<
+                "0. Exit\n" << std::endl;
+}
+
+int main()
+{
     std::string fileName = "chainness_point_2021_part1.csv";
     std::string fileName2 = "chainness_point_2021_part2.csv";
     std::string fileName3 = "chainness_point_2021_part3.csv";
-    std::string restaurantName;
-    std::string cusine;
-    std::string openHours;
-    std::string state;
-    std::string countryGEOID; //int
-    std::string countryName;
-    std::string uaGEOID; //int
-    std::string uaName;
-    std::string msaGEOID; //int
-    std::string msaName;
-    std::string longitude; //double
-    std::string latitude; //double
-    std::string frequencyString; //int
-    std::string isChainString; //int
 
-    /*std::cout << "Enter first dataset file name: " << std::endl;
-    std::cin >> fileName;
-    std::cout << "Enter second dataset file name: " << std::endl;
-    std::cin >> fileName2;
-    std::cout << "Enter third dataset file name: " << std::endl;
-    std::cin >> fileName3;*/
-
-    readFile(fileName, restaurantName, cusine, openHours, state, countryGEOID, countryName, uaGEOID, uaName, msaGEOID, msaName, longitude, latitude, frequencyString, isChainString);
+    std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>> usRestaurants;
+    
+    //readFile(fileName, usRestaurants);
+    //readFile(fileName2, usRestaurants);
+    //readFile(fileName3, usRestaurants);
 
     int choice;
 
     std::cout << "Welcome to the U.S. Restaurant Frequency Project!" << std::endl;
-    std::cout << "Menu:" << std::endl;
-    std::cout << "1. Find top 5 most frequent NON-chain restaurants in a specific state" << std::endl;
-    std::cout << "2. Find top 5 most frequent chain restaurant in a specific state" << std::endl;
-    std::cout << "3. List top 10 most frequent chain restaurants in the U.S." << std::endl;
-    std::cout << "4. List top 10 most frequent NON-chain restaurants in the U.S." << std::endl;
-    std::cout << "5. What state is a certain restaurant most frequent in?" << std::endl;
+    callMenu();
 
     std::cin >> choice;
-    if (choice == 1) {
-        std::string state;
-        std::cout << "Which state would you like to select? " << std::endl;
-        std::cin >> state;
+    bool running = true;
+    std::string state,restaurant;
+    while (running){
+        switch (choice)
+        {
+            case 0:
+                running = false;
+                break;
+            case 1:
+                std::cout << "\nWhich state would you like to select?\n" << std::endl;
+                std::cin >> state;
+                std::cout << state << " is cool\n" << std::endl;
+                callMenu();
+                std::cin >> choice;
+                break;
+            case 2:
+                std::cout << "\nWhich state would you like to select?\n" << std::endl;
+                std::cin >> state;
+                std::cout << state << " is cool\n" << std::endl;
+                callMenu();
+                std::cin >> choice;
+                break;
+            case 3:
+                //temp
+                callMenu();
+                std::cin >> choice;
+                break;
+            case 4:
+                // temp
+                callMenu();
+                std::cin >> choice;
+                break;
+            case 5:
+                std::cout << "\nWhich restaurant would you like to select?\n" << std::endl;
+                std::cin >> restaurant;
+                std::cout << restaurant << " is cool\n" << std::endl;
+                callMenu();
+                std::cin >> choice;
+                break;
+            default:
+                std::cout << "\nPlease enter a valid number."<< std::endl;
+                callMenu();
+                std::cin >> choice;
+                break;
+        }
     }
-    else if (choice == 2) {
-        std::string state;
-        std::cout << "Which state would you like to select? " << std::endl;
-        std::cin >> state;
-    }
-    else if (choice == 3) {
-
-    }
-    else if (choice == 4) {
-
-    }
-    else if (choice == 5) {
-        std::string restaurant;
-        std::cout << "Which restaurant would you like to select? " << std::endl;
-        std::cin >> restaurant;
-    }
-
-
     return 0;
 }
