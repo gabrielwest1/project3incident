@@ -106,9 +106,7 @@ void readFile(const std::string& fileName,std::unordered_map<std::string,std::un
         frequency = std::stoi(frequencyString);
         getline(stream, isChainString, ','); // ------------------------- need
         isChain = std::stoi(isChainString);
-
-        list.insert(std::make_pair(state,std::unordered_map<std::string,std::vector<std::pair<int,int>>>()));
-        list[state].insert(std::make_pair(restaurantName,std::vector<std::pair<int,int>>()));
+        
         list[state][restaurantName].push_back(std::make_pair(frequency,isChain));
     }
 }
