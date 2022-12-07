@@ -52,8 +52,20 @@ void top10_MostFrequent_NonChain_NationWide(int& sort,std::unordered_map<std::st
 }
 void restaurant_MostFrequent_StateSide(std::string& restaurant,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
-
-}
+    int max = 0;
+    std::string sMax;
+    std::unordered_map<std::string, std::vector<std::pair<int,int>>>::iterator ptr;
+    for (auto iter = list.find(restaurant); iter != list.end(); iter++) {
+        int i = 0;
+        i++;
+            for (ptr = iter->second.begin(); ptr != iter->second.end(); ptr++) {
+                if (ptr->second[i].first > max ) {
+                    max = ptr->second[i].first;
+            }
+        }
+      }
+        std::cout << max << std::endl;
+ }
 
 // function to read in file and update the current container
 void readFile(const std::string& fileName,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
@@ -146,7 +158,7 @@ int main()
                 running = false;
                 break;
             case 1:
-                std::cout << "\nWhich state would you like to select?\n" << std::endl;
+                std::cout << "\nWhich state would you like to select? (Using its abbreviation)\n" << std::endl;
                 std::cin >> state;
 
                 callSort();
@@ -158,7 +170,7 @@ int main()
                 std::cin >> choice;
                 break;
             case 2:
-                std::cout << "\nWhich state would you like to select?\n" << std::endl;
+                std::cout << "\nWhich state would you like to select? (Using its abbreviation)\n" << std::endl;
                 std::cin >> state;
                 
                 callSort();
