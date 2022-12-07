@@ -67,7 +67,8 @@ void readFile(const std::string& fileName,std::unordered_map<std::string,std::un
     // data that will be used for all functions
     std::string restaurantName,state,frequencyString,isChainString;
     int frequency,isChain;
-
+    
+    getline(inFile, line); // gets rid of header line
     while (getline(inFile, line)) {
         std::istringstream stream(line);
         getline(stream, restaurantName, ','); // ------------------------- need
@@ -85,11 +86,13 @@ void readFile(const std::string& fileName,std::unordered_map<std::string,std::un
         getline(stream, msaName, ','); // dont need
         getline(stream, longitude, ','); // dont need
         getline(stream, latitude, ','); // dont need
+        getline(stream, longitude, ','); // dont need
+        getline(stream, latitude, ','); // dont need
 
         getline(stream, frequencyString, ','); // ------------------------- need
-        frequency = stoi(frequencyString);
+        frequency = std::stoi(frequencyString);
         getline(stream, isChainString, ','); // ------------------------- need
-        isChain = stoi(isChainString);
+        isChain = std::stoi(isChainString);
 
         list.insert(std::make_pair(state,std::unordered_map<std::string,std::vector<std::pair<int,int>>>()));
         list[state].insert(std::make_pair(restaurantName,std::vector<std::pair<int,int>>()));
@@ -124,9 +127,9 @@ int main()
 
     std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>> usRestaurants;
     
-    //readFile(fileName1, usRestaurants);
-    //readFile(fileName2, usRestaurants);
-    //readFile(fileName3, usRestaurants);
+    readFile(fileName1, usRestaurants);
+    readFile(fileName2, usRestaurants);
+    readFile(fileName3, usRestaurants);
 
     int choice,sort; // sort will contain 1 or 2 for quick or merge respectively
 
