@@ -2,33 +2,33 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include "Sorts.h"
 
 // menu functions utilizing sorts
-void top5_Chains_StateSide(std::string& state,int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top5_Chains_StateSide(std::string& state,int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top5_NonChains_StateSide(std::string& state,int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top5_NonChains_StateSide(std::string& state,int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top10_MostFrequent_Chain_NationWide(int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top10_MostFrequent_Chain_NationWide(int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void top10_MostFrequent_NonChain_NationWide(int& sort,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void top10_MostFrequent_NonChain_NationWide(int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
-void restaurant_MostFrequent_StateSide(std::string& restaurant,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void restaurant_MostFrequent_StateSide(std::string& restaurant,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
 
 }
 
 // function to read in file and update the current container
-void readFile(const std::string& fileName,std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>>& list)
+void readFile(const std::string& fileName,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
     std::ifstream inFile(fileName);
     std::string line;
@@ -63,7 +63,7 @@ void readFile(const std::string& fileName,std::map<std::string,std::map<std::str
         getline(stream, isChainString, ','); // ------------------------- need
         isChain = stoi(isChainString);
 
-        list.insert(std::make_pair(state,std::map<std::string,std::vector<std::pair<int,int>>>()));
+        list.insert(std::make_pair(state,std::unordered_map<std::string,std::vector<std::pair<int,int>>>()));
         list[state].insert(std::make_pair(restaurantName,std::vector<std::pair<int,int>>()));
         list[state][restaurantName].push_back(std::make_pair(frequency,isChain));
     }
@@ -94,7 +94,7 @@ int main()
     std::string fileName2 = "chainness_point_2021_part2.csv";
     std::string fileName3 = "chainness_point_2021_part3.csv";
 
-    std::map<std::string,std::map<std::string,std::vector<std::pair<int,int>>>> usRestaurants;
+    std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>> usRestaurants;
     
     //readFile(fileName1, usRestaurants);
     //readFile(fileName2, usRestaurants);
