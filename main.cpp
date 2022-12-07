@@ -8,19 +8,47 @@
 // menu functions utilizing sorts
 void top5_Chains_StateSide(std::string& state,int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
+    switch(sort)
+    {
+        case 1: // quick sort
+            break;
+        case 2: // merge sort
+            break;
 
+    }
 }
 void top5_NonChains_StateSide(std::string& state,int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
+    switch(sort)
+    {
+        case 1: // quick sort
+            break;
+        case 2: // merge sort
+            break;
 
+    }
 }
 void top10_MostFrequent_Chain_NationWide(int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
+    switch(sort)
+    {
+        case 1: // quick sort
+            break;
+        case 2: // merge sort
+            break;
 
+    }
 }
 void top10_MostFrequent_NonChain_NationWide(int& sort,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
+    switch(sort)
+    {
+        case 1: // quick sort
+            break;
+        case 2: // merge sort
+            break;
 
+    }
 }
 void restaurant_MostFrequent_StateSide(std::string& restaurant,std::unordered_map<std::string,std::unordered_map<std::string,std::vector<std::pair<int,int>>>>& list)
 {
