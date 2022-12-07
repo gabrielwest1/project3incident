@@ -60,7 +60,7 @@ void restaurant_MostFrequent_StateSide(std::string& restaurant,std::unordered_ma
         i++;
             for (ptr = iter->second.begin(); ptr != iter->second.end(); ptr++) {
                 if (ptr->second[i].first > max ) {
-                   // max = ptr->second[i].first;
+                   max = ptr->second[i].first;
                     sMax = ptr->first;
             }
         }
